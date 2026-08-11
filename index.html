@@ -883,6 +883,53 @@
   @media (prefers-reduced-motion: reduce){
     *{ animation:none !important; transition:none !important; }
   }
+
+  /* Minimal product icons */
+  .coll-icon{
+    width:58px;
+    height:58px;
+    margin:0 auto 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--gold-deep);
+  }
+  .product-icon{
+    width:48px;
+    height:48px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.35;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .coll-card{
+    min-height:320px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+
+  @media (max-width: 560px){
+    .coll-grid{
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:12px;
+    }
+    .coll-card{
+      min-height:0;
+      padding:24px 12px 20px;
+    }
+    .coll-icon{
+      width:44px;
+      height:44px;
+      margin-bottom:12px;
+    }
+    .product-icon{
+      width:38px;
+      height:38px;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -955,32 +1002,44 @@
   </div>
   <div class="coll-grid">
       <div class="coll-card reveal">
-        <div class="coll-icon">♡</div>
+        <div class="coll-icon">
+          <svg class="product-icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="30" r="19"/><path d="M45 44l5 5"/><path d="M48 47c3-2 6 0 6 3s-3 5-6 3c-3 2-6 0-6-3s3-5 6-3z"/></svg>
+        </div>
         <h3>Bracelet</h3>
         <p>Ocean-inspired bracelets with pearl and shell detailing, designed for effortless everyday styling.</p>
       </div>
       <div class="coll-card reveal">
-        <div class="coll-icon">◌</div>
+        <div class="coll-icon">
+          <svg class="product-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 25h44"/><path d="M14 25v23M20 25v23M26 25v23M32 25v23M38 25v23M44 25v23M50 25v23"/><path d="M22 25c2-7 8-11 14-11 6 0 10 4 12 11"/><circle cx="42" cy="17" r="3"/></svg>
+        </div>
         <h3>Comb</h3>
         <p>Practical, stylish combs finished with PEARLFECT's signature coastal-inspired details.</p>
       </div>
       <div class="coll-card reveal">
-        <div class="coll-icon">◉</div>
+        <div class="coll-icon">
+          <svg class="product-icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="29" r="20"/><path d="M32 49v8M26 57h12"/><path d="M27 14c-5 3-8 8-8 14"/></svg>
+        </div>
         <h3>Mirror</h3>
         <p>Compact pocket mirrors made for quick touch-ups wherever your day takes you.</p>
       </div>
       <div class="coll-card reveal">
-        <div class="coll-icon">◇</div>
+        <div class="coll-icon">
+          <svg class="product-icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="25" cy="20" r="10"/><path d="M32 27l18 18"/><path d="M43 38l8-8 5 5-8 8"/><path d="M39 34l-7 7"/><path d="M47 45c0 5-4 9-9 9s-9-4-9-9"/></svg>
+        </div>
         <h3>Key Chain</h3>
         <p>Charming ocean-inspired key chains that add a subtle PEARLFECT touch to your essentials.</p>
       </div>
       <div class="coll-card reveal">
-        <div class="coll-icon">✦</div>
+        <div class="coll-icon">
+          <svg class="product-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M13 24c9-8 29-8 38 0-3 9-7 17-19 20-12-3-16-11-19-20z"/><path d="M20 28c6 3 18 3 24 0"/><path d="M19 43v8M25 44v7M31 45v6M37 44v7M43 42v9"/><circle cx="32" cy="24" r="4"/></svg>
+        </div>
         <h3>Hair Clamp</h3>
         <p>Easy-to-wear hair clamps combining everyday function with pearl and shell-inspired accents.</p>
       </div>
       <div class="coll-card reveal">
-        <div class="coll-icon">✧</div>
+        <div class="coll-icon">
+          <svg class="product-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M13 39c8-16 20-23 38-22-4 13-12 25-29 30-5 1-10-3-9-8z"/><path d="M20 42l25-20"/><path d="M15 48l8 4"/><path d="M18 44l7 6"/><circle cx="19" cy="43" r="3"/></svg>
+        </div>
         <h3>Hair Clip</h3>
         <p>Delicate hair clips designed to elevate simple hairstyles with a coastal-inspired finish.</p>
       </div>
