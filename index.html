@@ -204,6 +204,54 @@
   }
   .btn-ghost:hover{ border-color:var(--ink); background: rgba(110,98,86,0.06); }
 
+  /* ---------- PRE-ORDER COUNTDOWN ---------- */
+  .countdown-wrap{
+    margin-top:38px;
+    text-align:center;
+  }
+  .countdown-label{
+    font-size:0.72rem;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--gold-deep);
+    font-weight:500;
+    margin-bottom:14px;
+  }
+  .countdown{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .countdown-unit{
+    min-width:72px;
+    padding:12px 10px 10px;
+    border:1px solid rgba(110,98,86,0.18);
+    background:rgba(254,252,251,0.72);
+    border-radius:3px;
+  }
+  .countdown-unit strong{
+    display:block;
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.9rem;
+    line-height:1;
+    color:var(--ink);
+  }
+  .countdown-unit span{
+    display:block;
+    margin-top:6px;
+    font-size:0.62rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--taupe);
+  }
+  .countdown-open{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.7rem;
+    color:var(--gold-deep);
+    font-style:italic;
+  }
+
   .wave-divider{
     position:absolute;
     bottom:-2px; left:0; right:0;
@@ -579,12 +627,257 @@
     .visit-grid{ grid-template-columns:1fr; gap:50px; }
   }
   @media (max-width: 560px){
-    section{ padding:90px 6vw; }
-    .coll-grid{ grid-template-columns:1fr; }
-    .val-grid{ grid-template-columns:1fr; }
-    .about-stats{ gap:28px; flex-wrap:wrap; }
-    header{ padding:18px 6vw; }
-    .nav-cta{ display:none; }
+    /* ---------- PHONE OPTIMIZATION ---------- */
+    section{ padding:72px 16px; }
+
+    header{
+      padding:14px 16px;
+    }
+
+    .brand{ gap:8px; }
+    .brand img{ width:28px; }
+    .brand span{
+      font-size:1.2rem;
+      letter-spacing:0.11em;
+    }
+
+    .hero{
+      min-height:100svh;
+      padding:112px 18px 72px;
+    }
+
+    .hero-logo{
+      width:68px;
+      margin-bottom:20px;
+    }
+
+    .hero .eyebrow{
+      font-size:0.62rem;
+      letter-spacing:0.22em;
+      margin-bottom:14px;
+    }
+
+    .hero h1{
+      font-size:clamp(2.7rem, 14vw, 4rem);
+      line-height:1;
+      max-width:12ch;
+    }
+
+    .hero p.sub{
+      margin-top:20px;
+      font-size:0.94rem;
+      line-height:1.6;
+      max-width:34ch;
+    }
+
+    .hero-actions{
+      width:100%;
+      margin-top:30px;
+      gap:10px;
+    }
+
+    .btn-primary, .btn-ghost{
+      width:100%;
+      padding:13px 18px;
+      font-size:0.68rem;
+    }
+
+    .countdown-wrap{
+      margin-top:28px;
+      width:100%;
+    }
+
+    .countdown{
+      gap:7px;
+      flex-wrap:nowrap;
+    }
+
+    .countdown-unit{
+      min-width:0;
+      flex:1;
+      padding:10px 5px 8px;
+    }
+
+    .countdown-unit strong{ font-size:1.45rem; }
+    .countdown-unit span{
+      font-size:0.55rem;
+      letter-spacing:0.1em;
+    }
+
+    .section-head{
+      margin-bottom:42px;
+    }
+
+    .section-head h2{
+      font-size:2.25rem;
+      line-height:1.05;
+    }
+
+    .section-head p{
+      font-size:0.9rem;
+      line-height:1.65;
+    }
+
+    /* Products: always 2 columns on phones */
+    .coll-grid{
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:12px;
+      width:100%;
+    }
+
+    .coll-card{
+      padding:24px 12px 20px;
+      min-width:0;
+      border-radius:6px;
+    }
+
+    .coll-icon{
+      width:40px;
+      height:40px;
+      margin-bottom:14px;
+    }
+
+    .coll-card h3{
+      font-size:1.15rem;
+      line-height:1.05;
+      margin-bottom:8px;
+    }
+
+    .coll-card p{
+      font-size:0.74rem;
+      line-height:1.5;
+      margin-bottom:0;
+    }
+
+    .about-grid,
+    .visit-grid{
+      gap:34px;
+    }
+
+    .about-visual{
+      max-width:420px;
+      margin:0 auto;
+    }
+
+    .about-text h2{
+      font-size:2.1rem;
+      line-height:1.05;
+    }
+
+    .about-text p{
+      font-size:0.9rem;
+      line-height:1.7;
+    }
+
+    .about-stats{
+      gap:18px;
+      justify-content:space-between;
+    }
+
+    .about-stats div{
+      flex:1;
+      min-width:0;
+    }
+
+    .about-stats div strong{
+      font-size:1.7rem;
+    }
+
+    .about-stats div span{
+      font-size:0.62rem;
+      line-height:1.4;
+    }
+
+    /* Keep values compact and scannable on phones */
+    .val-grid{
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:1px;
+    }
+
+    .val-card{
+      padding:28px 16px;
+    }
+
+    .val-card h3{
+      font-size:1.15rem;
+      line-height:1.1;
+    }
+
+    .val-card p{
+      font-size:0.75rem;
+      line-height:1.55;
+    }
+
+    .banner{
+      padding:78px 18px;
+    }
+
+    .banner h2{
+      font-size:2rem;
+      line-height:1.15;
+    }
+
+    .banner p{
+      font-size:0.9rem;
+      line-height:1.65;
+    }
+
+    .visit h2{
+      font-size:2.1rem;
+      line-height:1.05;
+    }
+
+    .visit p{
+      font-size:0.9rem;
+      line-height:1.7;
+    }
+
+    .visit-detail{
+      gap:10px;
+      align-items:flex-start;
+    }
+
+    .visit-detail .label{
+      width:82px;
+      font-size:0.62rem;
+    }
+
+    .visit-detail .val{
+      font-size:0.82rem;
+      line-height:1.5;
+      overflow-wrap:anywhere;
+    }
+
+    .visit-map{
+      width:100%;
+      max-width:420px;
+      margin:0 auto;
+    }
+
+    footer{
+      padding:38px 16px 28px;
+    }
+
+    .footer-top,
+    .footer-bottom{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:18px;
+    }
+
+    .footer-links{
+      flex-wrap:wrap;
+      gap:16px 22px;
+    }
+
+    .footer-links a{
+      font-size:0.68rem;
+    }
+
+    .footer-bottom{
+      font-size:0.65rem;
+      line-height:1.5;
+    }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -613,8 +906,16 @@
   <span class="eyebrow">Handcrafted &middot; Ocean-Inspired &middot; Pandi, Bulacan</span>
   <h1>Find the piece<br><em>that's you</em></h1>
   <p class="sub">Pearls, clam shell, and seashell accessories crafted for the way you actually live &mdash; tarnish-free, humidity-proof, and made to be worn every day, not just admired.</p>
+  <div class="countdown-wrap" aria-live="polite">
+    <div class="countdown-label">Pre-orders open August 17</div>
+    <div class="countdown" id="preorder-countdown">
+      <div class="countdown-unit"><strong id="countdown-days">--</strong><span>Days</span></div>
+      <div class="countdown-unit"><strong id="countdown-hours">--</strong><span>Hours</span></div>
+      <div class="countdown-unit"><strong id="countdown-minutes">--</strong><span>Minutes</span></div>
+      <div class="countdown-unit"><strong id="countdown-seconds">--</strong><span>Seconds</span></div>
+    </div>
+  </div>
   <div class="hero-actions">
-    <a href="#collections" class="btn-primary">Pre-Order Now</a>
     <a href="#about" class="btn-ghost">Our Story</a>
   </div>
   <div class="wave-divider">
@@ -661,7 +962,6 @@
       </svg>
       <h3>Necklaces</h3>
       <p>Layered shell and pearl strands, coin pendants, coral-motif chains.</p>
-      <div class="coll-price">Pre-Order</div>
     </div>
 
     <div class="coll-card reveal">
@@ -671,7 +971,6 @@
       </svg>
       <h3>Bracelets</h3>
       <p>Beaded, shell, pearl-strand, and charm bracelets for everyday stacking.</p>
-      <div class="coll-price">Pre-Order</div>
     </div>
 
     <div class="coll-card reveal">
@@ -682,7 +981,6 @@
       </svg>
       <h3>Earrings</h3>
       <p>Pearl studs, shell huggies, and wave or starfish charm drops.</p>
-      <div class="coll-price">Pre-Order</div>
     </div>
 
     <div class="coll-card reveal">
@@ -692,7 +990,6 @@
       </svg>
       <h3>Vanity Sets</h3>
       <p>Shell-shaped mirrors and pearl-handle combs, a gift-able everyday essential.</p>
-      <div class="coll-price">Pre-Order</div>
     </div>
 
   </div>
@@ -781,6 +1078,33 @@
 </footer>
 
 <script>
+  // Pre-orders open at 12:00 AM Philippine Time on August 17, 2026.
+  const preorderOpen = new Date('2026-08-17T00:00:00+08:00').getTime();
+  const countdown = document.getElementById('preorder-countdown');
+  const countdownWrap = document.querySelector('.countdown-wrap');
+
+  function updateCountdown(){
+    const remaining = preorderOpen - Date.now();
+
+    if (remaining <= 0){
+      countdownWrap.innerHTML = '<div class="countdown-open">Pre-orders are now open.</div>';
+      return;
+    }
+
+    const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((remaining / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((remaining / (1000 * 60)) % 60);
+    const seconds = Math.floor((remaining / 1000) % 60);
+
+    document.getElementById('countdown-days').textContent = String(days).padStart(2, '0');
+    document.getElementById('countdown-hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('countdown-minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('countdown-seconds').textContent = String(seconds).padStart(2, '0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
   }, { threshold: 0.15 });
