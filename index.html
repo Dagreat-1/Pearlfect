@@ -1069,6 +1069,165 @@
   }
 
 
+/* ---------- PRE-ORDER SYSTEM ---------- */
+.preorder-section{
+  padding:110px 7vw;
+  background:var(--cream, #FEFCFB);
+}
+.preorder-intro{
+  max-width:620px;
+  margin:18px auto 0;
+  color:var(--taupe);
+}
+.preorder-layout{
+  max-width:1100px;
+  margin:48px auto 0;
+  display:grid;
+  grid-template-columns:minmax(0,1.5fr) minmax(280px,.8fr);
+  gap:28px;
+  align-items:start;
+}
+.preorder-card,.inventory-card{
+  border:1px solid rgba(110,98,86,.22);
+  background:#fff;
+  padding:30px;
+}
+.preorder-card{
+  box-shadow:0 18px 50px rgba(60,48,38,.06);
+}
+.preorder-card label{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  color:var(--ink);
+  font-size:.78rem;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.preorder-card input,.preorder-card select{
+  width:100%;
+  border:1px solid var(--taupe);
+  background:#fff;
+  color:var(--ink);
+  padding:13px 14px;
+  font:inherit;
+  font-size:.92rem;
+  text-transform:none;
+  letter-spacing:0;
+  outline:none;
+}
+.preorder-card input:focus,.preorder-card select:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(180,150,88,.12);
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.form-row{margin-bottom:18px}
+.order-item{
+  margin-top:18px;
+  padding:18px;
+  background:rgba(110,98,86,.045);
+  border:1px solid rgba(110,98,86,.12);
+}
+.item-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:13px;
+  font-size:.76rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.item-heading small{
+  text-transform:none;
+  letter-spacing:0;
+  opacity:.65;
+}
+.remaining-badge{
+  font-size:.68rem;
+  color:var(--taupe);
+}
+.preorder-total{
+  margin-top:18px;
+  padding:16px 0;
+  border-top:1px solid rgba(110,98,86,.18);
+  border-bottom:1px solid rgba(110,98,86,.18);
+  display:flex;
+  justify-content:space-between;
+}
+.form-note,.inventory-note{
+  color:var(--taupe);
+  font-size:.78rem;
+  line-height:1.6;
+}
+.preorder-submit{
+  margin-top:16px;
+  width:100%;
+  border:0;
+  cursor:pointer;
+}
+.preorder-submit:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+.preorder-message{
+  display:none;
+  margin-top:16px;
+  padding:14px;
+  font-size:.84rem;
+  line-height:1.5;
+}
+.preorder-message.success{
+  display:block;
+  border:1px solid #b8cdb7;
+  background:#f4faf3;
+}
+.preorder-message.error{
+  display:block;
+  border:1px solid #d8b5ad;
+  background:#fff7f5;
+}
+.inventory-card h3{
+  margin:8px 0 20px;
+}
+.inventory-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.inventory-row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:center;
+  padding:12px 0;
+  border-bottom:1px solid rgba(110,98,86,.12);
+}
+.inventory-name{
+  font-size:.86rem;
+}
+.inventory-status{
+  text-align:right;
+  font-size:.72rem;
+  color:var(--taupe);
+}
+.inventory-status.out{
+  color:#9a5b52;
+  font-weight:600;
+}
+.inventory-loading{
+  color:var(--taupe);
+  font-size:.82rem;
+}
+@media(max-width:800px){
+  .preorder-layout{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .preorder-section{padding:80px 5vw}
+}
+
 </style>
 </head>
 <body>
@@ -1094,7 +1253,8 @@
   <a href="#preorder" class="hero-preorder-btn" onclick="openPreorderModal(); return false;">Pre-Order Now</a>
   <p class="sub">Pearls, clam shell, and seashell accessories crafted for the way you actually live &mdash; tarnish-free, humidity-proof, and made to be worn every day, not just admired.</p>
   <div class="hero-actions">
-     <a href="#about" class="btn-ghost">Our Story</a>
+    <a href="#preorder" class="btn-primary" id="hero-preorder-btn">Pre-Order Now</a>
+    <a href="#about" class="btn-ghost">Our Story</a>
   </div>
   <div class="wave-divider">
     <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
@@ -1103,6 +1263,105 @@
   </div>
 </section>
 
+
+<section class="preorder-section" id="preorder">
+  <div class="section-head reveal">
+    <span class="eyebrow">Limited Pre-Orders</span>
+    <h2>Reserve your PEARLFECT pieces</h2>
+    <p class="preorder-intro">Pre-order up to 2 pieces overall. Each product has a limited number of pre-order slots.</p>
+    <div class="rule"></div>
+  </div>
+
+  <div class="preorder-layout">
+    <div class="preorder-card reveal">
+      <form id="preorder-form" novalidate>
+        <div class="form-row">
+          <label>
+            Full Name
+            <input type="text" id="po-name" name="name" placeholder="Your full name" autocomplete="name" required>
+          </label>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            Course
+            <input type="text" id="po-course" name="course" placeholder="e.g. BSBA" required>
+          </label>
+          <label>
+            Section
+            <input type="text" id="po-section" name="section" placeholder="e.g. OM 4A" required>
+          </label>
+        </div>
+
+        <div class="order-item">
+          <div class="item-heading">
+            <span>Product 1</span>
+            <span class="remaining-badge" id="remaining-1"></span>
+          </div>
+          <div class="form-grid">
+            <label>
+              Product
+              <select id="po-product1" name="product1" required>
+                <option value="">Select a product</option>
+              </select>
+            </label>
+            <label>
+              Quantity
+              <select id="po-qty1" name="qty1" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="order-item" id="second-item">
+          <div class="item-heading">
+            <span>Product 2 <small>(optional)</small></span>
+            <span class="remaining-badge" id="remaining-2"></span>
+          </div>
+          <div class="form-grid">
+            <label>
+              Product
+              <select id="po-product2" name="product2">
+                <option value="">No second product</option>
+              </select>
+            </label>
+            <label>
+              Quantity
+              <select id="po-qty2" name="qty2">
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="preorder-total">
+          <span>Total pieces</span>
+          <strong id="po-total">0 / 2</strong>
+        </div>
+
+        <p class="form-note">Maximum of 2 pieces overall per pre-order.</p>
+
+        <button type="submit" class="btn-primary preorder-submit" id="preorder-submit">
+          Submit Pre-Order
+        </button>
+
+        <div id="preorder-message" class="preorder-message" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <aside class="inventory-card reveal">
+      <span class="eyebrow">Live Availability</span>
+      <h3>Pre-order slots</h3>
+      <div id="inventory-list" class="inventory-list">
+        <div class="inventory-loading">Loading availability...</div>
+      </div>
+      <p class="inventory-note">Availability is shared across customers and updated through our order system.</p>
+    </aside>
+  </div>
+</section>
 
 <section class="about" id="about">
   <div class="about-grid">
@@ -1340,325 +1599,367 @@
 </footer>
 
 <script>
-/* ---------- PEARLFECT GOOGLE SHEETS PRE-ORDER SYSTEM ---------- */
-const PEARLFECT_API_URL = 'https://script.google.com/macros/s/AKfycbxksdXaO7BSM9gaYc_22vmLyx9rzWJBpo_eaT1l4AgzCKek_6KVOKUu0-n2yOqiGUWY/exec';
+  /* ---------- PEARLFECT GOOGLE SHEETS PRE-ORDER SYSTEM ---------- */
+  const PEARLFECT_API_URL = 'https://script.google.com/macros/s/AKfycbxksdXaO7BSM9gaYc_22vmLyx9rzWJBpo_eaT1l4AgzCKek_6KVOKUu0-n2yOqiGUWY/exec';
 
-const PREORDER_LIMITS = {
-  'Bracelet': 20,
-  'Key Chain': 20,
-  'Comb': 20,
-  'Hair Clip': 20,
-  'Mirror': 10,
-  'Hair Clamp': 10
-};
+  const PRODUCTS = [
+    { name: 'Bracelet', limit: 20 },
+    { name: 'Key Chain', limit: 20 },
+    { name: 'Comb', limit: 20 },
+    { name: 'Hair Clip', limit: 20 },
+    { name: 'Mirror', limit: 10 },
+    { name: 'Hair Clamp', limit: 10 }
+  ];
 
-let inventory = {};
-let submitting = false;
-let inventoryCallbackCounter = 0;
-
-function getRemaining(product) {
-  const limit = PREORDER_LIMITS[product] || 0;
-  return Math.max(0, limit - Number(inventory[product] || 0));
-}
-
-function updateProductAvailability() {
-  document.querySelectorAll('.product-card').forEach(card => {
-    const product = card.dataset.product;
-    const status = card.querySelector(`[data-stock-status="${product}"]`);
-    if (!status) return;
-
-    const remaining = getRemaining(product);
-    if (remaining <= 0) {
-      status.textContent = 'Out of stock';
-      status.classList.add('sold-out');
-    } else {
-      status.textContent = `${remaining} pre-order${remaining === 1 ? '' : 's'} left`;
-      status.classList.remove('sold-out');
-    }
-  });
-
-  document.querySelectorAll('.product-select').forEach(select => {
-    const selected = select.value;
-    Array.from(select.options).forEach(option => {
-      if (!option.value) return;
-      const remaining = getRemaining(option.value);
-      option.disabled = remaining <= 0 && option.value !== selected;
-      option.textContent = remaining <= 0
-        ? `${option.value} — Out of stock`
-        : option.value;
-    });
-  });
-}
-
-function loadInventory() {
-  return new Promise(resolve => {
-    const callbackName = `pearlfectInventory_${Date.now()}_${++inventoryCallbackCounter}`;
-    const script = document.createElement('script');
-    const cleanup = () => {
-      delete window[callbackName];
-      script.remove();
-    };
-
-    window[callbackName] = data => {
-      inventory = (data && data.inventory) || {};
-      updateProductAvailability();
-      cleanup();
-      resolve(true);
-    };
-
-    script.onerror = () => {
-      console.error('Could not load PEARLFECT inventory.');
-      document.querySelectorAll('.stock-status').forEach(el => {
-        if (!el.classList.contains('sold-out')) el.textContent = 'Availability unavailable';
-      });
-      cleanup();
-      resolve(false);
-    };
-
-    script.src = `${PEARLFECT_API_URL}?action=inventory&callback=${encodeURIComponent(callbackName)}&_=${Date.now()}`;
-    document.head.appendChild(script);
-  });
-}
-
-function openPreorderModal() {
-  const modal = document.getElementById('preorder');
-  if (!modal) return;
-
-  const success = document.getElementById('preorder-success');
-  if (success && success.style.display === 'block') resetPreorderForm();
-
-  modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  loadInventory();
-}
-
-function resetPreorderForm() {
   const form = document.getElementById('preorder-form');
-  if (form) form.reset();
-
+  const product1 = form ? form.querySelector('[name="product1"]') : null;
+  const product2 = form ? form.querySelector('[name="product2"]') : null;
+  const qty1 = form ? form.querySelector('[name="qty1"]') : null;
+  const qty2 = form ? form.querySelector('[name="qty2"]') : null;
+  const messageEl = document.getElementById('preorder-message');
+  const submitBtn = form ? form.querySelector('.preorder-submit') : null;
+  const inventoryList = document.getElementById('inventory-list');
   const formView = document.getElementById('preorder-form-view');
-  const success = document.getElementById('preorder-success');
-  if (formView) formView.style.display = 'block';
-  if (success) success.style.display = 'none';
+  const successView = document.getElementById('preorder-success');
+  const successText = document.getElementById('preorder-success-text');
 
-  const message = document.getElementById('preorder-message');
-  if (message) {
-    message.textContent = '';
-    message.classList.remove('error');
-    message.style.display = 'none';
+  let inventory = {};
+  let submitting = false;
+
+  function getRemaining(productName) {
+    const product = PRODUCTS.find(p => p.name === productName);
+    if (!product) return 0;
+    return Math.max(0, product.limit - Number(inventory[productName] || 0));
   }
 
-  updateQuantityControls();
-}
+  function showMessage(text, type = 'error') {
+    if (!messageEl) return;
+    messageEl.className = `preorder-message ${type}`;
+    messageEl.textContent = text;
+    messageEl.style.display = 'block';
+  }
 
-function closePreorderModal() {
-  const modal = document.getElementById('preorder');
-  if (!modal) return;
-  modal.classList.remove('open');
-  document.body.style.overflow = '';
-}
+  function clearMessage() {
+    if (!messageEl) return;
+    messageEl.textContent = '';
+    messageEl.className = 'preorder-message';
+    messageEl.style.display = 'none';
+  }
 
-function showPreorderMessage(message, isError = false) {
-  const el = document.getElementById('preorder-message');
-  if (!el) return;
-  el.textContent = message;
-  el.classList.toggle('error', isError);
-  el.style.display = 'block';
-}
+  function updateProductAvailability() {
+    document.querySelectorAll('.product-card').forEach(card => {
+      const productName = card.dataset.product;
+      const status = card.querySelector('.stock-status');
+      if (!status || !productName) return;
 
-function updateQuantityControls() {
-  const form = document.getElementById('preorder-form');
-  if (!form) return;
+      const remaining = getRemaining(productName);
+      if (remaining <= 0) {
+        status.textContent = 'Out of stock';
+        status.classList.add('sold-out');
+      } else {
+        status.textContent = `${remaining} pre-order${remaining === 1 ? '' : 's'} left`;
+        status.classList.remove('sold-out');
+      }
+    });
+  }
 
-  const p1 = form.elements.product1.value;
-  const p2 = form.elements.product2.value;
-  const q1 = form.elements.qty1;
-  const q2 = form.elements.qty2;
+  function renderInventory() {
+    if (!inventoryList) return;
+    inventoryList.innerHTML = '';
 
-  const max1 = Math.min(2, getRemaining(p1) || 0);
-  const previous1 = Number(q1.value || 1);
-  q1.innerHTML = '';
-  for (let i = 1; i <= max1; i++) q1.add(new Option(String(i), String(i)));
-  if (max1 === 0) q1.add(new Option('0', '0'));
-  else q1.value = String(Math.min(previous1 || 1, max1));
+    PRODUCTS.forEach(product => {
+      const remaining = getRemaining(product.name);
+      const out = remaining <= 0;
+      inventoryList.insertAdjacentHTML('beforeend', `
+        <div class="inventory-row">
+          <span class="inventory-name">${product.name}</span>
+          <span class="inventory-status${out ? ' out' : ''}">
+            ${out ? 'Out of stock' : `${remaining} left`}
+          </span>
+        </div>
+      `);
+    });
+  }
 
-  const remainingOverall = Math.max(0, 2 - Number(q1.value || 0));
-  const max2 = p2 ? Math.min(2, getRemaining(p2), remainingOverall) : 0;
-  const previous2 = Number(q2.value || 0);
-  q2.innerHTML = '';
-  q2.add(new Option('0', '0'));
-  for (let i = 1; i <= max2; i++) q2.add(new Option(String(i), String(i)));
-  if (previous2 > 0 && previous2 <= max2) q2.value = String(previous2);
-  else if (max2 > 0 && p2) q2.value = '1';
+  function setQuantityOptions(select, max, preferred = 1) {
+    if (!select) return;
+    select.innerHTML = '';
+    if (max <= 0) {
+      select.innerHTML = '<option value="0">0</option>';
+      return;
+    }
+    for (let i = 1; i <= max; i++) {
+      select.insertAdjacentHTML('beforeend', `<option value="${i}">${i}</option>`);
+    }
+    select.value = String(Math.min(Math.max(preferred, 1), max));
+  }
 
-  // Prevent the same product being selected twice; customers can instead order 2 of one product.
-  Array.from(form.elements.product2.options).forEach(option => {
-    if (option.value) option.disabled = option.value === p1 || getRemaining(option.value) <= 0;
-  });
+  function updateQuantityControls() {
+    if (!product1 || !product2 || !qty1 || !qty2) return;
 
-  const total = Number(q1.value || 0) + Number(q2.value || 0);
-  const limitText = form.querySelector('.preorder-limit');
-  if (limitText) limitText.textContent = `Selected: ${total} / 2 pieces. Maximum: 2 pieces overall per pre-order submission.`;
-}
+    const p1 = product1.value;
+    const p2 = product2.value;
+    const previous1 = Number(qty1.value || 1);
+    const previous2 = Number(qty2.value || 0);
 
-async function submitPreorder() {
-  const form = document.getElementById('preorder-form');
-  if (!form || submitting) return;
+    const max1 = Math.min(2, getRemaining(p1));
+    setQuantityOptions(qty1, max1, previous1);
 
-  const data = new FormData(form);
-  const name = String(data.get('name') || '').trim();
-  const course = String(data.get('course') || '').trim();
-  const section = String(data.get('section') || '').trim();
-  const product1 = String(data.get('product1') || '').trim();
-  const product2 = String(data.get('product2') || '').trim();
-  const qty1 = Number(data.get('qty1') || 0);
-  const qty2 = Number(data.get('qty2') || 0);
-  const totalPieces = qty1 + qty2;
+    const firstQty = Number(qty1.value || 0);
+    const remainingOverall = Math.max(0, 2 - firstQty);
+    const max2 = Math.min(2, getRemaining(p2), remainingOverall);
 
-  if (!name || !course || !section) return showPreorderMessage('Please complete your name, course, and section.', true);
-  if (!product1 || qty1 < 1) return showPreorderMessage('Please select your first product.', true);
-  if (totalPieces < 1 || totalPieces > 2) return showPreorderMessage('You can only pre-order a maximum of 2 pieces overall.', true);
-  if (product2 && product1 === product2) return showPreorderMessage('Please choose two different products, or order quantity 2 of the first product.', true);
+    if (!p2 || max2 <= 0) {
+      qty2.innerHTML = '<option value="0">0</option>';
+    } else {
+      setQuantityOptions(qty2, max2, previous2 || 1);
+    }
 
-  const requested = {};
-  requested[product1] = qty1;
-  if (product2 && qty2 > 0) requested[product2] = qty2;
+    updateTotal();
+  }
 
-  for (const [product, qty] of Object.entries(requested)) {
-    const remaining = getRemaining(product);
-    if (qty > remaining) {
-      return showPreorderMessage(`${product} only has ${remaining} pre-order${remaining === 1 ? '' : 's'} left.`, true);
+  function updateTotal() {
+    if (!qty1 || !qty2) return;
+    let total = Number(qty1.value || 0) + Number(qty2.value || 0);
+    if (total > 2) {
+      if (document.activeElement === qty1) qty2.value = '0';
+      else qty1.value = '1';
+      total = Number(qty1.value || 0) + Number(qty2.value || 0);
+    }
+
+    const totalEl = document.getElementById('po-total');
+    if (totalEl) totalEl.textContent = `${total} / 2`;
+  }
+
+  function populateProducts() {
+    if (!product1 || !product2) return;
+
+    const selected1 = product1.value;
+    const selected2 = product2.value;
+
+    product1.innerHTML = '<option value="">Select a product</option>';
+    product2.innerHTML = '<option value="">Second product (optional)</option>';
+
+    PRODUCTS.forEach(product => {
+      const remaining = getRemaining(product.name);
+      const disabled = remaining <= 0 ? ' disabled' : '';
+      const label = remaining <= 0
+        ? `${product.name} — Out of stock`
+        : `${product.name} — ${remaining} left`;
+
+      product1.insertAdjacentHTML('beforeend', `<option value="${product.name}"${disabled}>${label}</option>`);
+      product2.insertAdjacentHTML('beforeend', `<option value="${product.name}"${disabled}>${label}</option>`);
+    });
+
+    if (selected1 && getRemaining(selected1) > 0) product1.value = selected1;
+    if (selected2 && getRemaining(selected2) > 0) product2.value = selected2;
+
+    updateQuantityControls();
+  }
+
+  async function loadInventory() {
+    try {
+      const response = await fetch(`${PEARLFECT_API_URL}?action=inventory&_=${Date.now()}`, {
+        method: 'GET',
+        cache: 'no-store'
+      });
+
+      if (!response.ok) throw new Error(`Inventory request failed: ${response.status}`);
+
+      const data = await response.json();
+      if (!data || !data.success || !data.inventory) {
+        throw new Error('Invalid inventory response.');
+      }
+
+      inventory = data.inventory;
+      updateProductAvailability();
+      renderInventory();
+      populateProducts();
+    } catch (error) {
+      console.error('Inventory load error:', error);
+      document.querySelectorAll('.stock-status').forEach(el => {
+        el.textContent = 'Availability unavailable';
+      });
+      if (inventoryList) {
+        inventoryList.innerHTML = '<div class="inventory-loading">Availability unavailable. Please refresh and try again.</div>';
+      }
     }
   }
 
-  submitting = true;
-  const button = form.querySelector('.preorder-submit');
-  if (button) {
-    button.disabled = true;
-    button.textContent = 'Submitting...';
+  function resetPreorderForm() {
+    if (form) form.reset();
+    if (qty1) qty1.innerHTML = '<option value="1">1</option><option value="2">2</option>';
+    if (qty2) qty2.innerHTML = '<option value="0">0</option><option value="1">1</option>';
+    if (formView) formView.style.display = 'block';
+    if (successView) successView.style.display = 'none';
+    clearMessage();
+    updateQuantityControls();
   }
 
-  // Random client token lets us verify the server accepted the order without exposing customer data.
-  const clientOrderId = `PF-${Date.now()}-${Math.floor(100000 + Math.random() * 900000)}`;
-  const payload = {
-    clientOrderId,
-    name,
-    course,
-    section,
-    product1,
-    qty1,
-    product2,
-    qty2
+  window.openPreorderModal = function() {
+    const modal = document.getElementById('preorder');
+    if (!modal) return;
+    if (successView && successView.style.display === 'block') resetPreorderForm();
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    loadInventory();
   };
 
-  try {
-    // text/plain avoids a browser CORS preflight. The response is intentionally opaque;
-    // we verify acceptance with a JSONP status check below.
-    await fetch(PEARLFECT_API_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
-    });
+  window.closePreorderModal = function() {
+    const modal = document.getElementById('preorder');
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  };
 
-    const confirmed = await waitForOrderConfirmation(clientOrderId, 10000);
-    if (!confirmed) {
-      throw new Error('The order could not be confirmed.');
-    }
-
-    await loadInventory();
-
-    document.getElementById('preorder-success-text').textContent =
-      `Thank you, ${name}. Your pre-order #${confirmed.orderId} for ${Object.entries(requested).map(([p, q]) => `${p} × ${q}`).join(', ')} has been recorded for ${course} - ${section}. Please keep your order number for confirmation.`;
-    document.getElementById('preorder-form-view').style.display = 'none';
-    document.getElementById('preorder-success').style.display = 'block';
-
-  } catch (error) {
-    console.error(error);
-    showPreorderMessage('We could not confirm your pre-order. Please wait a moment and check again before submitting another order.', true);
-    await loadInventory();
-  } finally {
-    submitting = false;
-    if (button) {
-      button.disabled = false;
-      button.textContent = 'Submit Pre-Order';
-    }
-  }
-}
-
-function waitForOrderConfirmation(clientOrderId, timeoutMs) {
-  return new Promise(resolve => {
-    const started = Date.now();
-    const check = () => {
-      const callbackName = `pearlfectStatus_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
-      const script = document.createElement('script');
-      let finished = false;
-      const cleanup = () => {
-        delete window[callbackName];
-        script.remove();
-      };
-      window[callbackName] = data => {
-        if (finished) return;
-        finished = true;
-        cleanup();
-        if (data && data.found && data.success) resolve(data);
-        else if (Date.now() - started >= timeoutMs) resolve(null);
-        else setTimeout(check, 700);
-      };
-      script.onerror = () => {
-        if (finished) return;
-        finished = true;
-        cleanup();
-        if (Date.now() - started >= timeoutMs) resolve(null);
-        else setTimeout(check, 700);
-      };
-      script.src = `${PEARLFECT_API_URL}?action=orderStatus&clientOrderId=${encodeURIComponent(clientOrderId)}&callback=${encodeURIComponent(callbackName)}&_=${Date.now()}`;
-      document.head.appendChild(script);
-    };
-    check();
-  });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('preorder');
-  const form = document.getElementById('preorder-form');
-  if (!modal || !form) return;
-
-  modal.addEventListener('click', event => {
-    if (event.target === modal) closePreorderModal();
-  });
-
-  form.addEventListener('change', () => {
-    const message = document.getElementById('preorder-message');
-    if (message) message.style.display = 'none';
-    updateQuantityControls();
-  });
-
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    submitPreorder();
-  });
-
-  const closeButton = modal.querySelector('.preorder-close');
-  if (closeButton) closeButton.addEventListener('click', () => {
-    resetPreorderForm();
-    closePreorderModal();
-  });
+  if (modal) {
+    modal.addEventListener('click', event => {
+      if (event.target === modal) window.closePreorderModal();
+    });
+  }
 
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') closePreorderModal();
+    if (event.key === 'Escape') window.closePreorderModal();
   });
 
-  // Load availability for the product cards immediately.
+  if (form) {
+    form.addEventListener('change', () => {
+      clearMessage();
+      updateQuantityControls();
+      updateProductAvailability();
+    });
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (submitting) return;
+      clearMessage();
+
+      const data = new FormData(form);
+      const name = String(data.get('name') || '').trim();
+      const course = String(data.get('course') || '').trim();
+      const section = String(data.get('section') || '').trim();
+      const items = [
+        { product: String(data.get('product1') || '').trim(), qty: Number(data.get('qty1') || 0) },
+        { product: String(data.get('product2') || '').trim(), qty: Number(data.get('qty2') || 0) }
+      ].filter(item => item.product && item.qty > 0);
+
+      const totalPieces = items.reduce((sum, item) => sum + item.qty, 0);
+
+      if (!name || !course || !section) {
+        showMessage('Please complete your name, course, and section.', 'error');
+        return;
+      }
+      if (!items.length) {
+        showMessage('Please select at least one product.', 'error');
+        return;
+      }
+      if (totalPieces > 2) {
+        showMessage('You can only pre-order a maximum of 2 pieces overall.', 'error');
+        return;
+      }
+
+      const requested = {};
+      items.forEach(item => {
+        requested[item.product] = (requested[item.product] || 0) + item.qty;
+      });
+
+      for (const [product, qty] of Object.entries(requested)) {
+        const remaining = getRemaining(product);
+        if (qty > remaining) {
+          showMessage(
+            remaining <= 0
+              ? `${product} is already out of stock.`
+              : `${product} only has ${remaining} pre-order${remaining === 1 ? '' : 's'} left.`,
+            'error'
+          );
+          await loadInventory();
+          return;
+        }
+      }
+
+      const payload = {
+        name,
+        course,
+        section,
+        product1: items[0]?.product || '',
+        qty1: items[0]?.qty || 0,
+        product2: items[1]?.product || '',
+        qty2: items[1]?.qty || 0
+      };
+
+      submitting = true;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+      }
+
+      try {
+        const response = await fetch(PEARLFECT_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (!data || !data.success) {
+          if (data && data.inventory) {
+            inventory = data.inventory;
+            updateProductAvailability();
+            renderInventory();
+            populateProducts();
+          }
+          showMessage(data?.message || 'We could not submit your pre-order. Please try again.', 'error');
+          return;
+        }
+
+        if (data.inventory) inventory = data.inventory;
+        updateProductAvailability();
+        renderInventory();
+        populateProducts();
+
+        if (successText) {
+          successText.textContent =
+            `Thank you, ${name}. Your pre-order #${data.orderId} for ${items.map(item => `${item.product} × ${item.qty}`).join(', ')} has been recorded for ${course} - ${section}. Please keep your order number for confirmation and payment instructions.`;
+        }
+
+        if (formView) formView.style.display = 'none';
+        if (successView) successView.style.display = 'block';
+
+      } catch (error) {
+        console.error('Pre-order submission error:', error);
+        showMessage('We could not confirm the pre-order response. Please check your Orders sheet before submitting again.', 'error');
+      } finally {
+        submitting = false;
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Pre-Order';
+        }
+      }
+    });
+  }
+
+  const closeButton = document.querySelector('.preorder-close');
+  if (closeButton) {
+    closeButton.addEventListener('click', () => {
+      resetPreorderForm();
+      window.closePreorderModal();
+      loadInventory();
+    });
+  }
+
+  /* Initial availability load */
   loadInventory();
 
+  /* Reveal animations */
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('in');
     });
   }, { threshold: 0.15 });
+
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-});
 </script>
 
 </body>
